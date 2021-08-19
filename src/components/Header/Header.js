@@ -1,6 +1,6 @@
 import React from 'react';
 
-const Header = () => {
+const Header = ({ name }) => {
   return (
     <div className='grid grid-cols-4 gap-4 text-white text-xl'>
       <div className='flex flex-col m2  pb-2'>
@@ -8,7 +8,7 @@ const Header = () => {
         <h3 className='pt-1 font-semibold'>Banka APP</h3>
       </div>
       <div className='m2 pb-2 col-span-2'>
-        <h2 className='pt-8 pb font-semibold text-2xl'>Name Bojan Mijatovic</h2>
+        <h2 className='pt-8 pb font-semibold text-2xl'>Name {name}</h2>
       </div>
       <div className='m2 pb-2 flex items-center '>
         <h3 className='pt-8 pb font-semibold'>Login</h3>
