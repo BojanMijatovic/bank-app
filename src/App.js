@@ -1,52 +1,31 @@
 import React from 'react';
-
-import Header from './components/Header/Header';
+import { Route, Switch } from 'react-router';
+import Home from './components/Home/Home';
+import Products from './pages/Products/Products';
+import Transactions from './pages/Transactions/Transactions';
+import News from './pages/News/News';
+import Accounts from './pages/Accounts/Accounts';
+import Cards from './pages/Cards/Cards';
+import Loans from './pages/Loans/Loans';
 import Navbar from './components/Navbar/Navbar';
-import TabItems from './components/TabItems/TabItems';
-import AccountList from './components/AccountList/AccountList';
-import WidgetZone from './components/WidgetZone/WidgetZone';
+import Header from './components/Header/Header';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      user: {
-        id: '0',
-        name: 'Bojan Mijatovic',
-        email: '',
-        accounts: [
-          {
-            name: 'regular',
-            id: '5844660845754',
-            currency: 'EUR',
-            balance: 4720.0,
-            available: 4000.0,
-          },
-          {
-            name: 'internet',
-            id: '16048786084575494',
-            currency: 'EUR',
-            balance: 320.0,
-            available: 320.0,
-          },
-        ],
-      },
-    };
-  }
-
-  render() {
-    const { user } = this.state;
-    const { accounts } = user;
-    return (
-      <div className='mx-auto text-center max-w-6xl bg-gradient-to-r from-yellow-500  to-yellow-600'>
-        <Header name={user.name} />
-        <Navbar />
-        <TabItems />
-        <AccountList accounts={accounts} />
-        <WidgetZone />
-      </div>
-    );
-  }
-}
+const App = () => {
+  return (
+    <div className='mx-auto text-center max-w-6xl bg-gradient-to-r from-yellow-500  to-yellow-600'>
+      <Navbar />
+      <Header />
+      <Switch>
+        <Route exact path='/' component={Home} />
+        <Route path='/products' component={Products} />
+        <Route path='/transactions' component={Transactions} />
+        <Route path='/news' component={News} />
+        <Route path='/accounts' component={Accounts} />
+        <Route path='/cards' component={Cards} />
+        <Route path='/loans' component={Loans} />
+      </Switch>
+    </div>
+  );
+};
 
 export default App;
