@@ -9,6 +9,7 @@ import Cards from './pages/Cards/Cards';
 import Loans from './pages/Loans/Loans';
 import Navbar from './components/Navbar/Navbar';
 import Header from './components/Header/Header';
+import LogInAndOut from './pages/LogInAndOut/LogInAndOut';
 
 const App = () => {
   return (
@@ -23,6 +24,7 @@ const App = () => {
         <Route path='/accounts' component={Accounts} />
         <Route path='/cards' component={Cards} />
         <Route path='/loans' component={Loans} />
+        <Route path='/logIn' component={LogInAndOut} />
       </Switch>
     </div>
   );

@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 const Navbar = ({ name }) => {
   return (
@@ -9,10 +10,12 @@ const Navbar = ({ name }) => {
           <h3 className='pt-1 font-semibold'>Banka APP</h3>
         </div>
         <div className='m2 pb-2 col-span-2'>
-          <h2 className='pt-8 pb font-semibold text-2xl'>Name {name}</h2>
+          <h2 className='pt-8 pb font-semibold text-2xl'>Name USER</h2>
         </div>
         <div className='m2 pb-2 flex items-center '>
-          <h3 className='pt-8 pb font-semibold'>Login</h3>
+          <Link to='/logIn'>
+            <h3 className='pt-8 pb font-semibold'>Login</h3>
+          </Link>
           <svg
             xmlns='http://www.w3.org/2000/svg'
             className='h-6 w-6 mt-8 ml-3'
