@@ -1,7 +1,7 @@
 import React from 'react';
-
+import LogIn from '../../components/LogIn/LogIn';
 const LogInAndOut = () => {
-  return <h1>Login Page</h1>;
+  return <LogIn />;
 };
 
 export default LogInAndOut;
