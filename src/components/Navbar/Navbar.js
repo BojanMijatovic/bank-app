@@ -35,17 +35,15 @@ const Navbar = ({ currentUser }) => {
         </div> */}
 
         {currentUser ? (
-          <div className='m2 pb-2 flex items-center' onClick={() => auth.signOut()}>
-            <Link to='/logout'>
-              <h3 className='pt-8 pb font-semibold'>Logout</h3>
-            </Link>
-          </div>
+          <Link to='/logout'>
+            <h3 className='pt-8 pb font-semibold' onClick={() => auth.signOut()}>
+              Logout
+            </h3>
+          </Link>
         ) : (
-          <div className='m2 pb-2 flex items-center '>
-            <Link to='/login'>
-              <h3 className='pt-8 pb font-semibold'>Login</h3>
-            </Link>
-          </div>
+          <Link to='/login'>
+            <h3 className='pt-8 pb font-semibold'>Login</h3>
+          </Link>
         )}
       </div>
     </>

@@ -11,7 +11,7 @@ import Navbar from './components/Navbar/Navbar';
 import Header from './components/Header/Header';
 import LogInAndOut from './pages/LogInAndOut/LogInAndOut';
 
-import { auth } from './firebase/firebase.utils';
+import { auth, createUserProfileDocument } from './firebase/firebase.utils';
 
 class App extends React.Component {
   constructor(props) {
@@ -27,7 +27,17 @@ class App extends React.Component {
   componentDidMount() {
     this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
       if (user) {
-        this.setState({ currentUser: user });
+        // User is signed in. add user to state and create user profile to firestore
+        const userRef = await createUserProfileDocument(user);
+
+        userRef.onSnapshot((snapShot) => {
+          this.setState({
+            currentUser: {
+              id: snapShot.id,
+              ...snapShot.data(),
+            },
+          });
+        });
         console.log(user);
       } else {
         this.setState({ currentUser: null });
