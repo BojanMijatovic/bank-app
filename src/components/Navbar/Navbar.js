@@ -1,7 +1,9 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-const Navbar = ({ name }) => {
+import { auth } from '../../firebase/firebase.utils';
+
+const Navbar = ({ currentUser }) => {
   return (
     <>
       <div className='grid grid-cols-4 gap-4 text-white text-xl'>
@@ -12,7 +14,7 @@ const Navbar = ({ name }) => {
         <div className='m2 pb-2 col-span-2'>
           <h2 className='pt-8 pb font-semibold text-2xl'>Name USER</h2>
         </div>
-        <div className='m2 pb-2 flex items-center '>
+        {/* <div className='m2 pb-2 flex items-center '>
           <Link to='/logIn'>
             <h3 className='pt-8 pb font-semibold'>Login</h3>
           </Link>
@@ -30,7 +32,21 @@ const Navbar = ({ name }) => {
               d='M11 16l-4-4m0 0l4-4m-4 4h14m-5 4v1a3 3 0 01-3 3H6a3 3 0 01-3-3V7a3 3 0 013-3h7a3 3 0 013 3v1'
             />
           </svg>
-        </div>
+        </div> */}
+
+        {currentUser ? (
+          <div className='m2 pb-2 flex items-center' onClick={() => auth.signOut()}>
+            <Link to='/logout'>
+              <h3 className='pt-8 pb font-semibold'>Logout</h3>
+            </Link>
+          </div>
+        ) : (
+          <div className='m2 pb-2 flex items-center '>
+            <Link to='/login'>
+              <h3 className='pt-8 pb font-semibold'>Login</h3>
+            </Link>
+          </div>
+        )}
       </div>
     </>
   );

@@ -1,4 +1,8 @@
 import React from 'react';
+import FormInput from '../FormInput/FormInput';
+import CustomButton from '../CustomButton/CustomButton';
+
+import { signInWithGoogle } from '../../firebase/firebase.utils';
 
 class LogIn extends React.Component {
   constructor(props) {
@@ -18,7 +22,6 @@ class LogIn extends React.Component {
 
   onSubmitForm = (e) => {
     e.preventDefault();
-
     this.setState({
       email: '',
       password: '',
@@ -27,23 +30,32 @@ class LogIn extends React.Component {
 
   render() {
     return (
-      <div className=''>
+      <div className='flex flex-col mt-5 mb-3 items-center justify-center '>
         <h2>I already have account</h2>
         <span>Sign In with your email and password</span>
-
-        <form onSubmit={this.onSubmitForm}>
-          <input type='email' name='email' placeholder='Email' value={this.state.email} onChange={this.onChangeInput} required />
-          <label>Email</label>
-          <input
+        <form onSubmit={this.onSubmitForm} className='flex flex-col items-center my-3'>
+          <FormInput
+            type='email'
+            name='email'
+            placeholder='Email'
+            value={this.state.email}
+            handleChange={this.onChangeInput}
+            required
+            label='email'
+          />
+          <FormInput
             type='password'
             name='password'
             placeholder='Password'
             value={this.state.password}
-            onChange={this.onChangeInput}
+            handleChange={this.onChangeInput}
             required
+            label='password'
           />
-          <label>Password</label>
-          <input type='submit' value='submit form' />
+          <div className='mt-3 flex items-center'>
+            <CustomButton type='submit'>sign in</CustomButton>
+            <CustomButton onClick={signInWithGoogle}>sign with google</CustomButton>
+          </div>
         </form>
       </div>
     );

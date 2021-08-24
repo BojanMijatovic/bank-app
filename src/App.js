@@ -11,23 +11,54 @@ import Navbar from './components/Navbar/Navbar';
 import Header from './components/Header/Header';
 import LogInAndOut from './pages/LogInAndOut/LogInAndOut';
 
-const App = () => {
-  return (
-    <div className='mx-auto text-center max-w-6xl bg-gradient-to-r from-yellow-500  to-yellow-600'>
-      <Navbar />
-      <Header />
-      <Switch>
-        <Route exact path='/' component={Home} />
-        <Route path='/products' component={Products} />
-        <Route path='/transactions' component={Transactions} />
-        <Route path='/news' component={News} />
-        <Route path='/accounts' component={Accounts} />
-        <Route path='/cards' component={Cards} />
-        <Route path='/loans' component={Loans} />
-        <Route path='/logIn' component={LogInAndOut} />
-      </Switch>
-    </div>
-  );
-};
+import { auth } from './firebase/firebase.utils';
+
+class App extends React.Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      currentUser: null,
+    };
+  }
+
+  unsubscribeFromAuth = null;
+
+  componentDidMount() {
+    this.unsubscribeFromAuth = auth.onAuthStateChanged(async (user) => {
+      if (user) {
+        this.setState({ currentUser: user });
+        console.log(user);
+      } else {
+        this.setState({ currentUser: null });
+      }
+    });
+  }
+
+  componentWillUnmount() {
+    this.unsubscribeFromAuth();
+  }
+
+  //  name={this.state.currentUser.displayName}
+
+  render() {
+    return (
+      <div className='mx-auto text-center max-w-6xl bg-gradient-to-r from-yellow-500  to-yellow-600'>
+        <Navbar currentUser={this.state.currentUser} />
+        <Header />
+        <Switch>
+          <Route exact path='/' component={Home} />
+          <Route path='/products' component={Products} />
+          <Route path='/transactions' component={Transactions} />
+          <Route path='/news' component={News} />
+          <Route path='/accounts' component={Accounts} />
+          <Route path='/cards' component={Cards} />
+          <Route path='/loans' component={Loans} />
+          <Route path='/logIn' component={LogInAndOut} />
+        </Switch>
+      </div>
+    );
+  }
+}
 
 export default App;
